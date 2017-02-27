@@ -2,7 +2,7 @@ package com.example.araragi.mycashflow.dao;
 
 import android.database.Cursor;
 
-import com.example.araragi.mycashflow.transactions.Transaction;
+import com.example.araragi.mycashflow.transactions.MoneyTransaction;
 
 /**
  * Created by Araragi on 2017-02-25.
@@ -10,10 +10,10 @@ import com.example.araragi.mycashflow.transactions.Transaction;
 
 public interface Dao {
 
-    Transaction getTransaction(long id);
-    long insertTransaction(Transaction transaction);
-    boolean deleteTransaction(Transaction transaction);
-    boolean updateTransaction(long id, Transaction transaction);
+    MoneyTransaction getTransaction(long id);
+    long insertTransaction(MoneyTransaction moneyTransaction);
+    boolean deleteTransaction(MoneyTransaction moneyTransaction);
+    boolean updateTransaction(long id, MoneyTransaction moneyTransaction);
 
     Cursor getAllTransactions();
     Cursor getAllExpenses();

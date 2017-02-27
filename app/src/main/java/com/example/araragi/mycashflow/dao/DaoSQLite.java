@@ -4,8 +4,9 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
-import com.example.araragi.mycashflow.transactions.Transaction;
+import com.example.araragi.mycashflow.transactions.MoneyTransaction;
 
 /**
  * Created by Araragi on 2017-02-24.
@@ -21,11 +22,11 @@ public class DaoSQLite implements Dao{
     public static final String KEY_DATE = "date";
     public static final String KEY_DESCRIPTION = "description";
 
-    public static final int COL_ID = 1;
-    public static final int COL_AMOUNT = 2;
-    public static final int COL_TYPE = 3;
-    public static final int COL_DATE = 4;
-    public static final int COL_DESCRIPTION = 5;
+    public static final int COL_ID = 0;
+    public static final int COL_AMOUNT = 1;
+    public static final int COL_TYPE = 2;
+    public static final int COL_DATE = 3;
+    public static final int COL_DESCRIPTION = 4;
 
     public static final int TYPE_EXPENSE = 1;
     public static final int TYPE_INCOME = 2;
@@ -68,7 +69,7 @@ public class DaoSQLite implements Dao{
         dbhelper.close();
     }
 
-    public Transaction getTransaction(long id){
+    public MoneyTransaction getTransaction(long id){
 
         String where = KEY_ID + "=" + id;
 
@@ -78,40 +79,57 @@ public class DaoSQLite implements Dao{
             c.moveToFirst();
         }
 
-        return new Transaction(c);
+        return new MoneyTransaction(c);
     };
 
 
 
-    public long insertTransaction(Transaction transaction){
+    public long insertTransaction(MoneyTransaction moneyTransaction){
 
         ContentValues values = new ContentValues();
-        values.put(KEY_AMOUNT, transaction.getAmount());
-        values.put(KEY_TYPE, transaction.getType());
-        values.put(KEY_DATE, transaction.getDate());
-        values.put(KEY_DESCRIPTION, transaction.getDescription());
+        values.put(KEY_AMOUNT, moneyTransaction.getAmount());
+        values.put(KEY_TYPE, moneyTransaction.getType());
+        values.put(KEY_DATE, moneyTransaction.getDate());
+        values.put(KEY_DESCRIPTION, moneyTransaction.getDescription());
 
         return database.insert(DATABASE_TABLE, null, values);
 
     }
-    public boolean deleteTransaction(Transaction transaction){
+    public boolean deleteTransaction(MoneyTransaction moneyTransaction){
 
-        String where = KEY_ID + "=" + transaction.getId();
+        String where = KEY_ID + "=" + moneyTransaction.getId();
+
+        return database.delete(DATABASE_TABLE, where, null) != 0;
+
+    }
+    public boolean deleteAll(){
+
+        String where = "1";
 
         return database.delete(DATABASE_TABLE, where, null) != 0;
 
     }
 
 
-    public boolean updateTransaction(long id, Transaction transaction){
+
+    public boolean updateTransaction(long id, MoneyTransaction moneyTransaction){
 
         String where = KEY_ID + "=" + id;
 
         ContentValues newValues = new ContentValues();
-        newValues.put(KEY_AMOUNT, transaction.getAmount());
-        newValues.put(KEY_TYPE, transaction.getType());
-        newValues.put(KEY_DATE, transaction.getDate());
-        newValues.put(KEY_AMOUNT, transaction.getDescription());
+
+
+        newValues.put(KEY_TYPE, moneyTransaction.getType());
+        newValues.put(KEY_DATE, moneyTransaction.getDate());
+        newValues.put(KEY_AMOUNT, moneyTransaction.getDescription());
+
+        Log.i(TAG, "-----new values put------");
+
+        newValues.put(KEY_AMOUNT, moneyTransaction.getAmount());
+
+        Log.i(TAG, "----new amount------");
+
+
 
         return database.update(DATABASE_TABLE, newValues, where, null) != 0;
     }

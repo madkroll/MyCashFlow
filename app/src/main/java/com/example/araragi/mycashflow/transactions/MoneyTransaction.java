@@ -8,17 +8,17 @@ import com.example.araragi.mycashflow.dao.DaoSQLite;
  * Created by Araragi on 2017-02-24.
  */
 
-public class Transaction {
+public class MoneyTransaction {
 
     private int id;
-    private float amount;
+    private double amount;
     private int type;
     private String date;
     private String description;
 
-    public Transaction(){};
+    public MoneyTransaction(){};
 
-    public Transaction(float amount, int type, String date, String description) {
+    public MoneyTransaction(double amount, int type, String date, String description) {
 
         this.amount = amount;
         this.type = type;
@@ -26,16 +26,17 @@ public class Transaction {
         this.description = description;
     }
 
-    public Transaction(float amount, int type, String date) {
+    public MoneyTransaction(double amount, int type, String date) {
 
         this.amount = amount;
         this.type = type;
         this.date = date;
+        this.description = "";
 
     }
 
 
-    public Transaction(int id, float amount, int type, String date, String description) {
+    public MoneyTransaction(int id, double amount, int type, String date, String description) {
         this.id = id;
         this.amount = amount;
         this.type = type;
@@ -43,9 +44,9 @@ public class Transaction {
         this.description = description;
     }
 
-    public Transaction(Cursor cursor){
+    public MoneyTransaction(Cursor cursor){
         this.id = cursor.getInt(DaoSQLite.COL_ID);
-        this.amount = cursor.getFloat(DaoSQLite.COL_AMOUNT);
+        this.amount = cursor.getDouble(DaoSQLite.COL_AMOUNT);
         this.type = cursor.getInt(DaoSQLite.COL_TYPE);
         this.date = cursor.getString(DaoSQLite.COL_DATE);
         this.description = cursor.getString(DaoSQLite.COL_DESCRIPTION);
@@ -59,7 +60,7 @@ public class Transaction {
         this.id = id;
     }
 
-    public float getAmount() {
+    public double getAmount() {
         return amount;
     }
 
