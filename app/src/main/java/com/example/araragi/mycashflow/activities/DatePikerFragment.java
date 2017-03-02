@@ -18,23 +18,43 @@ import com.example.araragi.mycashflow.R;
  * Created by Araragi on 2017-02-26.
  */
 
-public class DatePikerFragment extends DialogFragment {
+public class DatePikerFragment extends DialogFragment  implements DatePickerDialog.OnDateSetListener{
 
 
+        TextView textView;
+
+        @Override
+        public Dialog onCreateDialog(Bundle savedInstanceState) {
+
+            final Calendar c = Calendar.getInstance();
+            int year = c.get(Calendar.YEAR);
+            int month = c.get(Calendar.MONTH);
+            int day = c.get(Calendar.DAY_OF_MONTH);
 
 
-    @Override
-    public Dialog onCreateDialog(Bundle savedInstanceState) {
-         //Use the current time as the default values for the picker
-        final Calendar c = Calendar.getInstance();
-        int year = c.get(Calendar.YEAR);
-        int month = c.get(Calendar.MONTH);
-        int day  = c.get(Calendar.DAY_OF_MONTH);
+            return new DatePickerDialog(getActivity(),this , year, month, day);
+        }
 
-        return new DatePickerDialog(getActivity(), (MainActivity)getActivity(),year, month, day );
+        public void onDateSet(DatePicker view, int year, int month, int day) {
+
+            if(getActivity().findViewById(R.id.date_expence) != null) {
+
+                Log.i("date picker", "-----date exp view not null-----");
+
+                textView = (TextView) getActivity().findViewById(R.id.date_expence);
+                textView.setText((day + "-" + (month + 1) + "-" + year));
+            }
+            if(getActivity().findViewById(R.id.date_income) != null) {
+
+                Log.i("date picker", "-----date income view not null-----");
+
+                textView = (TextView) getActivity().findViewById(R.id.date_income);
+                textView.setText((day + "-" + (month + 1) + "-" + year));
+            }
+        }
     }
 
 
 
 
-}
+
