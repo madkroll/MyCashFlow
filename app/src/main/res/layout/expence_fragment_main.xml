@@ -11,35 +11,35 @@
 
 
         <Button
-            android:text="Button"
+            android:text="Save"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
-            android:id="@+id/save_btn_expense_fr" />
+            android:id="@+id/save_btn_expense_fr"
+            android:onClick="viewToMoneyTransaction"/>
 
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:inputType="numberDecimal"
             android:ems="10"
-            android:id="@+id/inc_main_amount"
+            android:id="@+id/incom_amount"
             android:layout_marginTop="69dp"
-            android:text="Expense"
             android:layout_below="@+id/date_expence"
             android:layout_centerHorizontal="true" />
 
         <TextView
-            android:text="TextView"
+
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/date_expence"
-            android:textSize="26sp"
+            android:textSize="50sp"
+            android:onClick="showDatePickerDialog"
             android:layout_alignParentTop="true"
-            android:layout_alignStart="@+id/inc_main_amount"
-            android:layout_marginTop="39dp"
-            android:layout_alignEnd="@+id/inc_main_amount"
-            android:onClick="showDatePickerDialog" />
+            android:layout_marginTop="50dp"
+            android:layout_alignStart="@+id/incom_amount"
+            android:layout_alignEnd="@+id/incom_amount" />
 
     </RelativeLayout>
 

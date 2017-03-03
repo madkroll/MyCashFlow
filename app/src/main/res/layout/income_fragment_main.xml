@@ -10,25 +10,14 @@
 
 
         <Button
-            android:text="Button"
+            android:text="Save"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
             android:id="@+id/save_btn_inc_fr" />
 
-        <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:inputType="numberDecimal"
-            android:ems="10"
-            android:id="@+id/inc_main_amount"
-            android:layout_marginTop="124dp"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true" />
-
         <TextView
-            android:text="TextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
@@ -36,7 +25,19 @@
             android:id="@+id/date_income"
             android:layout_alignStart="@+id/inc_main_amount"
             android:layout_alignEnd="@+id/inc_main_amount"
-            android:onClick="showDatePickerDialog"/>
+            android:onClick="showDatePickerDialog"
+            android:textSize="50sp" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="numberDecimal"
+            android:ems="10"
+            android:id="@+id/inc_main_amount"
+            android:layout_below="@+id/date_income"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="69dp"
+            android:layout_marginTop="144dp" />
 
     </RelativeLayout>
 

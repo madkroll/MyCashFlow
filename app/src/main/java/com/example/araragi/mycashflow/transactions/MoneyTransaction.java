@@ -1,6 +1,7 @@
 package com.example.araragi.mycashflow.transactions;
 
 import android.database.Cursor;
+import android.icu.util.Calendar;
 
 import com.example.araragi.mycashflow.dao.DaoSQLite;
 
@@ -9,6 +10,9 @@ import com.example.araragi.mycashflow.dao.DaoSQLite;
  */
 
 public class MoneyTransaction {
+
+    public static final int TYPE_EXPENSE = 1;
+    public static final int TYPE_INCOME = 2;
 
     private int id;
     private double amount;
@@ -25,6 +29,16 @@ public class MoneyTransaction {
         this.date = date;
         this.description = description;
     }
+    public MoneyTransaction(double amount, int type, Calendar c, String description) {
+
+        String date = c.get(Calendar.YEAR) + "-" + c.get(Calendar.MONTH) + "-" + c.get(Calendar.DAY_OF_MONTH);
+
+        this.amount = amount;
+        this.type = type;
+        this.date = date;
+        this.description = description;
+    }
+
 
     public MoneyTransaction(double amount, int type, String date) {
 
