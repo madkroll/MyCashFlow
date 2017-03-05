@@ -1,4 +1,4 @@
-package com.example.araragi.mycashflow.activities;
+package com.example.araragi.mycashflow.fragments;
 
 import android.app.DatePickerDialog;
 import android.icu.util.Calendar;
@@ -8,14 +8,18 @@ import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.araragi.mycashflow.R;
+import com.example.araragi.mycashflow.activities.MainActivity;
 import com.example.araragi.mycashflow.dao.DaoSQLite;
 import com.example.araragi.mycashflow.transactions.MoneyTransaction;
 
@@ -31,13 +35,12 @@ public class ExpenseMainFragment extends Fragment{
     EditText amount;
     Button saveBtn;
 
-    private DaoSQLite dao;
-
-
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+
+        setHasOptionsMenu(true);
 
         return inflater.inflate(R.layout.expence_fragment_main, null);
     }
@@ -46,18 +49,13 @@ public class ExpenseMainFragment extends Fragment{
     public void onStart() {
         super.onStart();
 
-        dao = new DaoSQLite(getActivity());
-
-
-        dateExpense = (TextView) getActivity().findViewById(R.id.date_expence);
-
         final Calendar c = Calendar.getInstance();
         int year = c.get(Calendar.YEAR);
         int month = c.get(Calendar.MONTH);
         int day = c.get(Calendar.DAY_OF_MONTH);
 
 
-
+        dateExpense = (TextView) getActivity().findViewById(R.id.date_expence);
         dateExpense.setText((day + "-" + month + "-" + year));
 
         saveBtn = (Button)getActivity().findViewById(R.id.save_btn_expense_fr);
@@ -65,7 +63,9 @@ public class ExpenseMainFragment extends Fragment{
             @Override
             public void onClick(View view){
                 MoneyTransaction moneyTransaction = viewToMoneyTransaction(view);
-                moneyTransactionToDao(moneyTransaction);
+                ((MainActivity)getActivity()).moneyTransactionToDao(moneyTransaction);
+                amount.setText("");
+                Toast.makeText(getActivity(), "Expense saved", Toast.LENGTH_SHORT).show();
             }
 
         });
@@ -94,21 +94,7 @@ public class ExpenseMainFragment extends Fragment{
 
     }
 
-    private void moneyTransactionToDao(MoneyTransaction mt){
 
-
-        dao.open();
-        Log.i(TAG, "----open db----");
-        long i = dao.insertTransaction(mt);
-
-        Log.i(TAG, "----insert transaction with id = " + i + " ----");
-
-        MoneyTransaction moneyTransaction = dao.getTransaction(i);
-
-        Log.i(TAG, "----get transaction with id = " + i + ", amount is " + moneyTransaction.getAmount() );
-
-        dao.close();
-    }
 
 
 }

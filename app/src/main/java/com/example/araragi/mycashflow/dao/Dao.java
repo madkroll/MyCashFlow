@@ -13,6 +13,7 @@ public interface Dao {
     MoneyTransaction getTransaction(long id);
     long insertTransaction(MoneyTransaction moneyTransaction);
     boolean deleteTransaction(MoneyTransaction moneyTransaction);
+    boolean deleteTransaction(long id);
     boolean updateTransaction(long id, MoneyTransaction moneyTransaction);
 
     Cursor getAllTransactions();

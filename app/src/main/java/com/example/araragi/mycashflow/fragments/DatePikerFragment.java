@@ -1,4 +1,4 @@
-package com.example.araragi.mycashflow.activities;
+package com.example.araragi.mycashflow.fragments;
 
 import android.app.Application;
 import android.app.Dialog;

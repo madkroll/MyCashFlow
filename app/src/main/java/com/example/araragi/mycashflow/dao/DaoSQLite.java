@@ -16,7 +16,7 @@ public class DaoSQLite implements Dao{
 
     private static final String TAG = "DaoSQLite";
 
-    public static final String KEY_ID = "id";
+    public static final String KEY_ID = "_id";
     public static final String KEY_AMOUNT = "amount";
     public static final String KEY_TYPE = "type";
     public static final String KEY_DATE = "date";
@@ -40,7 +40,7 @@ public class DaoSQLite implements Dao{
     public static final String DATABASE_TABLE = "transactions";
 
     public static final String DATABASE_CREATE_SCRIPT = "CREATE TABLE " + DATABASE_TABLE +
-            " (id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+            " (_id INTEGER PRIMARY KEY AUTOINCREMENT, " +
             "amount REAL, " +
             "type INTEGER NOT NULL, " +
             "date TEXT NOT NULL, " +
@@ -102,6 +102,16 @@ public class DaoSQLite implements Dao{
         return database.delete(DATABASE_TABLE, where, null) != 0;
 
     }
+    public boolean deleteTransaction(long id){
+
+        String where = KEY_ID + "=" + id;
+
+        return database.delete(DATABASE_TABLE, where, null) != 0;
+
+    }
+
+
+
     public boolean deleteAll(){
 
         String where = "1";

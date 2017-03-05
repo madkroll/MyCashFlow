@@ -1,4 +1,4 @@
-package com.example.araragi.mycashflow.activities;
+package com.example.araragi.mycashflow.fragments;
 
 import android.icu.util.Calendar;
 import android.os.Bundle;
@@ -11,8 +11,10 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.araragi.mycashflow.R;
+import com.example.araragi.mycashflow.activities.MainActivity;
 import com.example.araragi.mycashflow.dao.DaoSQLite;
 import com.example.araragi.mycashflow.transactions.MoneyTransaction;
 
@@ -60,8 +62,10 @@ public class IncomeMainFragment extends Fragment{
             @Override
             public void onClick(View view){
                 MoneyTransaction moneyTransaction = viewToMoneyTransaction(view);
-                moneyTransactionToDao(moneyTransaction);
-                ((MainActivity)getActivity()).typePizdaInLog();
+                ((MainActivity)getActivity()).moneyTransactionToDao(moneyTransaction);
+                amount.setText("");
+                Toast.makeText(getActivity(), "Income saved", Toast.LENGTH_SHORT).show();
+
             }
 
         });
@@ -70,12 +74,14 @@ public class IncomeMainFragment extends Fragment{
 
     public MoneyTransaction viewToMoneyTransaction(View v){
 
-        amount = (EditText)getActivity().findViewById(R.id.incom_amount);
+        amount = (EditText)getActivity().findViewById(R.id.inc_main_amount);
+
+        Log.i(TAG, "----" + amount + "----");
         double amountDouble = Double.parseDouble(amount.getText().toString());
 
         Log.i(TAG, "----" + amountDouble + "----");
 
-        incomeDate = (TextView) getActivity().findViewById(R.id.date_expence);
+        incomeDate = (TextView) getActivity().findViewById(R.id.date_income);
         String date = incomeDate.getText().toString();
 
         Log.i(TAG, "----" + date + "----");
@@ -83,21 +89,7 @@ public class IncomeMainFragment extends Fragment{
         return (new MoneyTransaction(amountDouble, MoneyTransaction.TYPE_EXPENSE, date));
 
     }
-    public void moneyTransactionToDao(MoneyTransaction mt){
 
-
-        dao.open();
-        Log.i(TAG, "----open db----");
-        long i = dao.insertTransaction(mt);
-
-        Log.i(TAG, "----insert transaction with id = " + i + " ----");
-
-        MoneyTransaction moneyTransaction = dao.getTransaction(i);
-
-        Log.i(TAG, "----get transaction with id = " + i + ", amount is " + moneyTransaction.getAmount() );
-
-        dao.close();
-    }
 
 
 
