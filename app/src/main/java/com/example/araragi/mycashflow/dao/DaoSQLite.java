@@ -14,6 +14,8 @@ import com.example.araragi.mycashflow.transactions.MoneyTransaction;
 
 public class DaoSQLite implements Dao{
 
+
+
     private static final String TAG = "DaoSQLite";
 
     public static final String KEY_ID = "_id";
