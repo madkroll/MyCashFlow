@@ -1,3 +1,11 @@
 <resources>
-    <string name="app_name">MyCashFlow</string>
+    <string name="app_name">MyCF</string>
+    <string name="expense_layout_save_btn">Save</string>
+    <string name="income_layout_save_btn">Save</string>
+    <string name="main_act_expense">Expense</string>
+    <string name="main_act_income">Income</string>
+    <string name="main_menu_statistics_btn">Statistics</string>
+    <string name="main_menu_list_btn">List</string>
+    <string name="ctx_list_menu_edit">edit</string>
+    <string name="ctx_list_menu_delete">delete</string>
 </resources>

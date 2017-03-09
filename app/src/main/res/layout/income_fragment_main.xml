@@ -6,16 +6,18 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/colorBluish">
 
 
         <Button
-            android:text="Save"
+            android:text="@string/income_layout_save_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
-            android:id="@+id/save_btn_inc_fr" />
+            android:id="@+id/save_btn_inc_fr"
+            android:background="@color/colorPrimary" />
 
         <TextView
             android:layout_width="wrap_content"

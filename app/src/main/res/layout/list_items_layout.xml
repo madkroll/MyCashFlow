@@ -14,13 +14,15 @@
             android:layout_width="wrap_content"
             android:layout_height="56dp"
             android:id="@+id/list_amount"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:gravity="center" />
 
         <TextView
             android:text="TextView"
             android:layout_width="wrap_content"
-            android:layout_height="57dp"
+            android:layout_height="56dp"
             android:id="@+id/list_date"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:gravity="center" />
     </LinearLayout>
 </LinearLayout>

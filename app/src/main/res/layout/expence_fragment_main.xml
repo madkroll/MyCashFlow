@@ -7,24 +7,26 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/colorRedish">
 
 
         <Button
-            android:text="Save"
+            android:text="@string/expense_layout_save_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
             android:id="@+id/save_btn_expense_fr"
-            android:onClick="viewToMoneyTransaction"/>
+            android:onClick="viewToMoneyTransaction"
+            android:background="@color/colorPrimary" />
 
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:inputType="numberDecimal"
             android:ems="10"
-            android:id="@+id/incom_amount"
+            android:id="@+id/expense_amount"
             android:layout_marginTop="69dp"
             android:layout_below="@+id/date_expence"
             android:layout_centerHorizontal="true" />
@@ -38,8 +40,8 @@
             android:onClick="showDatePickerDialog"
             android:layout_alignParentTop="true"
             android:layout_marginTop="50dp"
-            android:layout_alignStart="@+id/incom_amount"
-            android:layout_alignEnd="@+id/incom_amount" />
+            android:layout_alignStart="@+id/expense_amount"
+            android:layout_alignEnd="@+id/expense_amount" />
 
     </RelativeLayout>
 

@@ -56,7 +56,7 @@ public class ExpenseMainFragment extends Fragment{
 
 
         dateExpense = (TextView) getActivity().findViewById(R.id.date_expence);
-        dateExpense.setText((day + "-" + month + "-" + year));
+        dateExpense.setText((day + "-" + (month+1) + "-" + year));
 
         saveBtn = (Button)getActivity().findViewById(R.id.save_btn_expense_fr);
         saveBtn.setOnClickListener(new View.OnClickListener(){
@@ -80,8 +80,16 @@ public class ExpenseMainFragment extends Fragment{
 
     public MoneyTransaction viewToMoneyTransaction(View v){
 
-        amount = (EditText)getActivity().findViewById(R.id.incom_amount);
-        double amountDouble = Double.parseDouble(amount.getText().toString());
+        amount = (EditText)getActivity().findViewById(R.id.expense_amount);
+        double amountDouble = 0;
+        String s = "";
+        try {
+            s = amount.getText().toString();
+            amountDouble = Double.parseDouble(s);
+        }catch (Exception e){
+            Toast.makeText(getActivity(), "You shouldn't put " + s + " as amount", Toast.LENGTH_SHORT).show();
+
+        }
 
         Log.i(TAG, "----" + amountDouble + "----");
 

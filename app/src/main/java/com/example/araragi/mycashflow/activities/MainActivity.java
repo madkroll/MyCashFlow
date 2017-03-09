@@ -1,12 +1,16 @@
 package com.example.araragi.mycashflow.activities;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
@@ -18,6 +22,7 @@ import android.widget.Toast;
 
 import com.example.araragi.mycashflow.R;
 import com.example.araragi.mycashflow.dao.DaoSQLite;
+import com.example.araragi.mycashflow.database.DatabaseManager;
 import com.example.araragi.mycashflow.fragments.DatePikerFragment;
 import com.example.araragi.mycashflow.fragments.ExpenseMainFragment;
 import com.example.araragi.mycashflow.fragments.IncomeMainFragment;
@@ -26,6 +31,7 @@ import com.example.araragi.mycashflow.transactions.MoneyTransaction;
 public class MainActivity extends AppCompatActivity {
 
     public static final String TAG = "main activity";
+
 
 
     private ExpenseMainFragment expenseMainFragment;
@@ -38,37 +44,6 @@ public class MainActivity extends AppCompatActivity {
     DaoSQLite dao;
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-
-        Log.i(TAG, "---- on create menu was called-----");
-        menu.clear();
-        getMenuInflater().inflate(R.menu.menu_main_act, menu);
-        return true;
-    }
-    @Override
-
-    public boolean onOptionsItemSelected(MenuItem item) {
-
-        switch (item.getItemId()) {
-            case R.id.go_to_list:
-                Intent intent = new Intent(this, TransactionsListActivity.class);
-                startActivity(intent);;
-                return true;
-
-
-            case R.id.test_menu_item:
-                Toast.makeText(this, "---Test item was clicked---", Toast.LENGTH_LONG).show();
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
-
-
-
-
-
-    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_activity_fragment);
@@ -76,6 +51,8 @@ public class MainActivity extends AppCompatActivity {
 
         dao = new DaoSQLite(this);
         dao.open();
+
+
 
 
         expenseMainFragment = new ExpenseMainFragment();
@@ -92,6 +69,46 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        Log.i(TAG, "---- on create menu was called-----");
+        menu.clear();
+        getMenuInflater().inflate(R.menu.menu_main_act, menu);
+        return true;
+    }
+    @Override
+
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId()) {
+
+            case R.id.go_to_list:
+                Intent intentList = new Intent(this, TransactionsListActivity.class);
+                startActivity(intentList);;
+                return true;
+
+
+            case R.id.test_menu_item:
+                Intent intentDb = new Intent(this, DatabaseMigrationActivity.class);
+                startActivity(intentDb);
+                Toast.makeText(this, "---Test item was clicked---", Toast.LENGTH_LONG).show();
+                return true;
+
+            case R.id.go_to_stat:
+                Intent intentStat = new Intent(this, StatisticsActivity.class);
+                startActivity(intentStat);
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+
+
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
@@ -99,7 +116,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void onExpenseBtnClick(View v) {
+    public void onExpenseClick(View v) {
 
         transaction = manager.beginTransaction();
 
@@ -114,7 +131,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
-    public void onIncomeBtnClick(View v) {
+    public void onIncomeClick(View v) {
 
         transaction = manager.beginTransaction();
 
@@ -152,6 +169,9 @@ public class MainActivity extends AppCompatActivity {
 
         dao.close();
     }
+
+
+
 
 
 }
