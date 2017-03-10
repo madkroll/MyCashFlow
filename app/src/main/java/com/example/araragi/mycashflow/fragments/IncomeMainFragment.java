@@ -90,7 +90,7 @@ public class IncomeMainFragment extends Fragment{
         incomeDate = (TextView) getActivity().findViewById(R.id.date_income);
         String date = incomeDate.getText().toString();
 
-        return (new MoneyTransaction(amountDouble, MoneyTransaction.TYPE_EXPENSE, date));
+        return (new MoneyTransaction(amountDouble, MoneyTransaction.TYPE_INCOME, date));
 
     }
 

@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.icu.math.BigDecimal;
 import android.util.Log;
 
 import com.example.araragi.mycashflow.transactions.MoneyTransaction;
@@ -182,6 +183,35 @@ public class DaoSQLite implements Dao{
     }
 
 
+    public BigDecimal getIncomeSum(){
+
+        String query = "SELECT SUM(" + KEY_AMOUNT + ") FROM " + DATABASE_TABLE + " WHERE " + KEY_TYPE + "=2;";
+        Cursor c = database.rawQuery(query, null);
+
+        c.moveToFirst();
+        BigDecimal x = new BigDecimal(c.getDouble(0)).setScale(2, BigDecimal.ROUND_FLOOR);
+
+
+
+        return x;
+
+    }
+
+    public BigDecimal getExpenseSum(){
+
+
+
+        String query = "SELECT SUM(" + KEY_AMOUNT + ") FROM " + DATABASE_TABLE + " WHERE " + KEY_TYPE + "=1;";
+        Cursor c = database.rawQuery(query, null);
+
+        c.moveToFirst();
+        BigDecimal x = new BigDecimal(c.getDouble(0)).setScale(2, BigDecimal.ROUND_FLOOR);
+
+
+
+        return x;
+
+    }
 
 
 }
